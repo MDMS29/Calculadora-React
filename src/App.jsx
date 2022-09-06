@@ -19,6 +19,7 @@ function App() {
         {modal && <Historial
           setResult={setResult}
           setModal={setModal}
+          setHistorial={setHistorial}
           historial={historial}
         />}
         <div>

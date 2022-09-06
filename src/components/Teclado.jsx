@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Flecha from '../assets/flecha-izquierda.png'
 import generarID from './helpers/funtion.js'
+import Historial from '../assets/historia.png'
 
 const Section = styled.section`
     margin-top: 30px;
@@ -10,12 +11,12 @@ const Section = styled.section`
     justify-content: center;
     border-radius: 1.5em;
     height: 500px;
-    grid-template-columns: 90px 90px 90px 90px;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: repeat(7, 1fr);
     background-color: #0d0d0db7;
-    box-shadow: 0px 0px 19px 1px white;
+    box-shadow: inset 0px 0px 19px 1px #000000, 0px 0px 19px 5px #ffffff;
     @media screen and (max-width: 600px){
-        grid-template-columns: 70px 70px 70px 70px;
+        grid-template-columns: repeat(4, 65px);
         height: 400px;
     }
 `
@@ -42,11 +43,6 @@ const Input = styled.div`
         background-color: #797979;
         border-radius: 20px;
     }
-    &>button{
-        width: 30px;
-        height: 30px;
-        background-color: red;
-    }
 `
 const Boton = styled.button`
     color: #ffffff;
@@ -54,7 +50,6 @@ const Boton = styled.button`
     border: 1px  #0d0d0d73;
     border-radius: 50% ;
     margin: 1px;
-    width: auto;
     font-size: 1.8em;
     transition: expandir 1s ease;
     &:focus{
@@ -78,12 +73,13 @@ const Boton = styled.button`
     }
 `
 const Signos = styled.button`
-    padding: .5%;
+    height: 90%;
     color: #050505;
-    background-color: #ffffffc8;
+    background-color: #fffffff1;
+    padding: .5%;
     border: 1px  #0d0d0d73;
     border-radius: 50px;
-    width: auto;
+    margin: 1px;
     font-weight: 500;
     font-size: .8em;
     transition: 1s ease;
@@ -108,15 +104,24 @@ const Signos = styled.button`
     @media screen and (min-width: 600px){
         font-weight: 700;
         font-size: 1.5rem;
+        &>span{
+            font-size: 1em;
+        }
     }
- `
+    &>span{
+        color: red;
+        font-weight: 800;
+    }
+    `
 const SignoIgual = styled.button`
-    grid-row: 6;
-    grid-column: 2 / 5;
+    grid-row: 7;
+    grid-column: 1 / 5;
     border-radius: 50px;
     border: 1px  #0d0d0d73;
-    background-color: #ffffffc8;
-    margin-top: 3px;
+    background-color: #fa5a04c5;
+    color: white;
+    font-weight: 800;
+    margin: 1px;
     &:focus{
         animation: expandir 1s ease-out;
     }
@@ -140,15 +145,26 @@ const SignoIgual = styled.button`
         font-size: 1.5rem;
     }
 `
-const Img = styled.img`
-    display: flex;
+const ImgDele = styled.img`
     width: 30%;
     margin: 0 auto;
-    @media screen and (min-width: 600px){
-        width: 30%;
-        margin: 0 auto;
-    }
 `
+
+
+const BotonHisto = styled.button`
+    grid-column: 2/ span 2;
+    background-color: #fffffff1;
+    border-radius: 40px;
+    height: 95%;
+    border: none;
+`
+const ImgHisto = styled.img`
+    width: 30%;
+    margin: 3.5px auto;
+    @media screen and (min-width: 600px) {
+        width: 30%;
+    }
+    `
 
 const Teclado = ({setModal, result, setResult, historial, setHistorial}) => {
 
@@ -171,32 +187,35 @@ const Teclado = ({setModal, result, setResult, historial, setHistorial}) => {
 
     return (
         <Section>
-            <Input >{result}<Boton onClick={e => setModal(true)}></Boton></Input>
+            <Input >{result}</Input>
+
+            <Signos onClick={e => Reset()}><span>C</span></Signos>
+            <BotonHisto onClick={e => setModal(true)}><ImgHisto src={Historial} /></BotonHisto>
+            <Signos onClick={e => Delete()}><ImgDele src={Flecha} /></Signos>
 
             <Boton name="7" onClick={handleClick}>7</Boton>
             <Boton name="8" onClick={handleClick}>8</Boton>
             <Boton name="9" onClick={handleClick}>9</Boton>
-            <Signos onClick={e => Delete()}><Img src={Flecha} /></Signos>
-
+            <Signos name="/" onClick={handleClick}>/</Signos>
 
             <Boton name="4" onClick={handleClick}>4</Boton>
             <Boton name="5" onClick={handleClick}>5</Boton>
             <Boton name="6" onClick={handleClick}>6</Boton>
-            <Signos name="/" onClick={handleClick}>/</Signos>
+            <Signos name="*" onClick={handleClick}>*</Signos>
 
             <Boton name="1" onClick={handleClick}>1</Boton>
             <Boton name="2" onClick={handleClick}>2</Boton>
             <Boton name="3" onClick={handleClick}>3</Boton>
-            <Signos name="*" onClick={handleClick}>*</Signos>
 
-            <Signos name="+" onClick={handleClick}>+</Signos>
-            <Boton name="0" onClick={handleClick}>0</Boton>
-            <Signos onClick={e => Reset()}>C</Signos>
             <Signos name="-" onClick={handleClick}>-</Signos>
 
-
+            <Boton name="00" onClick={handleClick}>00</Boton>
+            <Boton name="0" onClick={handleClick}>0</Boton>
             <Signos name="." onClick={handleClick}>.</Signos>
+            <Signos name="+" onClick={handleClick}>+</Signos>
+
             <SignoIgual onClick={Calculate}>=</SignoIgual>
+
         </Section>
     )
 }
