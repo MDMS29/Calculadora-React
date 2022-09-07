@@ -74,7 +74,7 @@ const ListadoHistorial = ({ setResult, setModal, setHistorial, historial }) => {
             {historial && historial.length ? (
                 <DivHistorial>
                     <Titulo>Listado Operaciones</Titulo>
-                    <button type='button' onClick={resetear}>Resetear Hisotrial</button>
+                    <button type='button' onClick={()=>resetear()}>Resetear Hisotrial</button>
                     {historial.map((historia) => {
                         return (
                             <ItemsHistorial
