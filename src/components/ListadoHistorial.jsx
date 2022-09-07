@@ -60,6 +60,7 @@ const ListadoHistorial = ({ setResult, setModal, setHistorial, historial }) => {
         let confir = confirm('¿Desea resetear todo el Historial?')
         if (confir){
             setHistorial([])
+            location.reload()
             setResult("")
             setModal(false)
         } 

@@ -166,21 +166,23 @@ const ImgHisto = styled.img`
     }
     `
 
-const Teclado = ({setModal, result, setResult, historial, setHistorial}) => {
+const Teclado = ({ setModal, result, setResult, historial, setHistorial }) => {
 
-    useEffect(()=>{
-        localStorage.setItem('resultados', JSON.stringify(historial) ?? []) 
+    useEffect(() => {
+        localStorage.setItem('resultados', JSON.stringify(historial) ?? [])
     }, [result])
 
     const handleClick = (e) => setResult(result.concat(e.target.name))
     const Calculate = () => {
+
         setResult(eval(result).toString())
-        const id = generarID()
         const acciones = {
-            id: id,
+            id:  generarID(),
             operacion: result
         }
         setHistorial([...historial, acciones])
+
+
     }
     const Reset = () => setResult("")
     const Delete = () => setResult(result.slice(0, result.length - 1))
